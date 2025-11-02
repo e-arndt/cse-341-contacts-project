@@ -1,25 +1,42 @@
+// server.js
+require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
-const MongoClient = require('mongodb').MongoClient;
-const mongodb = require('./db/connect');
-const professionalRoutes = require('./routes/professional');
+const { initDb } = require('./database/connect');
+const routes = require('./routes/routes');
 
-const port = process.env.PORT || 8080;
 const app = express();
+const port = process.env.PORT || 8080;
 
+// Middleware
 app
-  .use(bodyParser.json())
+  .use(express.json())
   .use((req, res, next) => {
+    // CORS (Cross-Origin Resource Sharing) Allows other ports/domains to access API
     res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    if (req.method === 'OPTIONS') return res.sendStatus(204);
     next();
-  })
-  .use('/professional', professionalRoutes);
+  });
 
-mongodb.initDb((err, mongodb) => {
+// Routes
+app
+  .use('/', routes)
+  .get('/', (req, res) => res.send('Server is up'));
+
+// Main error handler
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ error: 'Server error', detail: err.message });
+});
+
+// Initialize DB, then start server
+initDb((err) => {
   if (err) {
-    console.log(err);
-  } else {
-    app.listen(port);
-    console.log(`Connected to DB and listening on ${port}`);
+    console.error('Database connection failed:', err);
+    process.exit(1);
   }
+  app.listen(port, () => {
+    console.log(`Connected to DB and listening on ${port}`);
+  });
 });
