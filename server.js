@@ -28,6 +28,7 @@ app
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).json({ error: 'Server error', detail: err.message });
+  next(err);
 });
 
 // Initialize DB, then start server
