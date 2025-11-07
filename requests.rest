@@ -18,7 +18,41 @@ GET https://cse-341-w01-contacts.onrender.com/
 GET https://cse-341-w01-contacts.onrender.com/contacts
 
 ### Render test - One contact
-GET https://cse-341-w01-contacts.onrender.com/contacts/6906df468c0abc46e3e19583
+GET https://cse-341-w01-contacts.onrender.com/contacts/690d80759c1acdc01132783c
 
 ### Render test - Professional route
 GET https://cse-341-w01-contacts.onrender.com/professional
+
+### Render test - New contact (POST)
+POST https://cse-341-w01-contacts.onrender.com/contacts
+Content-Type: application/json
+
+{
+  "firstName": "Donny",
+  "lastName": "Doe",
+  "email": "jane.doe@example.com",
+  "favoriteColor": "Navy",
+  "birthday": "1998-05-20"
+}
+
+
+### Render test - Update existing contact (PUT - John Doe)
+PUT https://cse-341-w01-contacts.onrender.com/contacts/690d80759c1acdc01132783c
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@updatedexample.com",
+  "favoriteColor": "Blue",
+  "birthday": "1990-03-15"
+}
+
+
+### Render test - Delete contact (DELETE - John Doe)
+DELETE https://cse-341-w01-contacts.onrender.com/contacts/690d787a35769c793aa1f88a
+
+
+### Render test - Verify deleted contact (GET)
+GET https://cse-341-w01-contacts.onrender.com/contacts/690d787a35769c793aa1f88a
+
