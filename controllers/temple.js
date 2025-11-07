@@ -4,7 +4,7 @@ const { getDb } = require('../database/connect');
 
 const checkKey = (req, res, next) => {
   const required = process.env.API_KEY;
-  if (!required) return next(); // apiKey optional for this assignment
+  if (!required) return next(); // apiKey ?!?
   const provided = req.header('apiKey');
   if (provided !== required) return res.status(401).json({ error: 'Invalid or missing apiKey' });
   next();
@@ -24,7 +24,7 @@ router.get(
     */
     try {
       const docs = await getDb().collection('temples').find({}, {
-        projection: { _id: 0 }   // hide Mongo _id for a cleaner response (optional)
+        projection: { _id: 0 }   // hide Mongo _id 
       }).toArray();
       res.json(docs);
     } catch (e) {

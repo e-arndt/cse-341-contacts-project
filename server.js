@@ -24,11 +24,11 @@ app
 
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
-  
+
 // Routes
 app
   .use('/', routes)
-  .get('/', (req, res) => res.send('Server is up'));
+  .get('/', /* #swagger.tags = ['Contacts'] */ (req, res) => res.send('Server is up'));
   
 
 // Main error handler

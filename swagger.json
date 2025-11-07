@@ -2,11 +2,21 @@
   "swagger": "2.0",
   "info": {
     "title": "Temple API",
-    "description": "Docs for /temples",
+    "description": "Docs for /contacts and /temples",
     "version": "1.0.0"
   },
   "host": "localhost:8080",
   "basePath": "/",
+  "tags": [
+    {
+      "name": "Contacts",
+      "description": "Endpoints for contact-related data"
+    },
+    {
+      "name": "Temples",
+      "description": "Endpoints for temple data"
+    }
+  ],
   "schemes": [
     "http"
   ],
@@ -19,6 +29,9 @@
   "paths": {
     "/": {
       "get": {
+        "tags": [
+          "Contacts"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -32,7 +45,10 @@
     },
     "/professional": {
       "get": {
-        "description": "",
+        "tags": [
+          "Contacts"
+        ],
+        "description": "Return static professional contact info",
         "responses": {
           "200": {
             "description": "OK"
@@ -45,7 +61,10 @@
     },
     "/contacts": {
       "get": {
-        "description": "",
+        "tags": [
+          "Contacts"
+        ],
+        "description": "Return all contacts",
         "parameters": [
           {
             "name": "id",
@@ -59,6 +78,184 @@
           },
           "204": {
             "description": "No Content"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "description": "Create a new contact",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string",
+                  "example": "John"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Doe"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "john.doe@example.com"
+                },
+                "favoriteColor": {
+                  "type": "string",
+                  "example": "Blue"
+                },
+                "birthday": {
+                  "type": "string",
+                  "example": "1990-01-01"
+                }
+              },
+              "required": [
+                "firstName",
+                "lastName",
+                "email",
+                "favoriteColor",
+                "birthday"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Validation error"
+          }
+        }
+      }
+    },
+    "/contacts/{id}": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "description": "Return a single contact by MongoDB _id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Invalid ID"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Contacts"
+        ],
+        "description": "Update an existing contact by _id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string",
+                  "example": "John"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Doe"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "john.doe@example.com"
+                },
+                "favoriteColor": {
+                  "type": "string",
+                  "example": "Blue"
+                },
+                "birthday": {
+                  "type": "string",
+                  "example": "1990-01-01"
+                }
+              },
+              "required": [
+                "firstName",
+                "lastName",
+                "email",
+                "favoriteColor",
+                "birthday"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Updated successfully"
+          },
+          "400": {
+            "description": "Invalid ID or data"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Contacts"
+        ],
+        "description": "Delete a contact by _id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted successfully"
+          },
+          "400": {
+            "description": "Invalid ID"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
