@@ -42,7 +42,7 @@ async function _initInternal() {
   process.once('SIGINT', async () => {
     try {
       await _client.close();
-      console.log('Mongo client closed (SIGINT).');
+      console.log('MongoDB client closed, Application stopped.');
     } finally {
       process.exit(0);
     }
