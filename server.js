@@ -34,9 +34,13 @@ app
 // Main error handler
 app.use((err, req, res, next) => {
   console.error(err);
+  if (res.headersSent) {
+    next(err);
+    return;
+  }
   res.status(500).json({ error: 'Server error', detail: err.message });
-  next(err);
 });
+
 
 // Initialize DB, then start server
 initDb((err) => {

@@ -1,6 +1,5 @@
-// swagger.js
 require('dotenv').config();
-const fs = require('fs');
+
 const path = require('path');
 const swaggerAutogen = require('swagger-autogen')();
 
@@ -10,19 +9,15 @@ const endpointsFiles = [
   path.join(__dirname, 'routes', 'routes.js')
 ];
 
-const routesFile = path.join(__dirname, 'routes', 'routes.js');
-if (fs.existsSync(routesFile)) {
-  endpointsFiles.push(routesFile);
-} else {
-  console.warn('[swagger] Note: routes/routes.js not found. Scanning server.js only.');
-}
-
 const doc = {
   swagger: '2.0',
-  info: { title: 'Contacts / Temple API', description: 'Docs for /contacts and /temples', version: '1.0.0' },
-  host: process.env.SWAGGER_HOST || `localhost:${process.env.PORT || 8080}`,
+  info: {
+    title: 'Contacts / Temple API',
+    description: 'Docs for /contacts and /temples',
+    version: '1.0.0'
+  },
   basePath: '/',
-  schemes: (process.env.SWAGGER_SCHEMES || 'http').split(','),
+  schemes: (process.env.SWAGGER_SCHEMES || 'https').split(','), // https default
   consumes: ['application/json'],
   produces: ['application/json'],
   tags: [
@@ -30,5 +25,10 @@ const doc = {
     { name: 'Temples', description: 'Endpoints for temple data' }
   ]
 };
+
+// Only set host if provided:
+if (process.env.SWAGGER_HOST) {
+  doc.host = process.env.SWAGGER_HOST;
+}
 
 swaggerAutogen(outputFile, endpointsFiles, doc);
