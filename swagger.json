@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Temple API",
+    "title": "Contacts / Temple API",
     "description": "Docs for /contacts and /temples",
     "version": "1.0.0"
   },

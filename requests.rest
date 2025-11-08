@@ -18,7 +18,7 @@ GET https://cse-341-w01-contacts.onrender.com/
 GET https://cse-341-w01-contacts.onrender.com/contacts
 
 ### Render test - One contact
-GET https://cse-341-w01-contacts.onrender.com/contacts/690d80759c1acdc01132783c
+GET https://cse-341-w01-contacts.onrender.com/contacts/6906df5e8c0abc46e3e19584
 
 ### Render test - Professional route
 GET https://cse-341-w01-contacts.onrender.com/professional
@@ -49,10 +49,10 @@ Content-Type: application/json
 }
 
 
-### Render test - Delete contact (DELETE - John Doe)
-DELETE https://cse-341-w01-contacts.onrender.com/contacts/690d787a35769c793aa1f88a
+### Render test - Delete contact (DELETE - Jane Doe)
+DELETE https://cse-341-w01-contacts.onrender.com/contacts/690d7f9c9c1acdc01132783b
 
 
 ### Render test - Verify deleted contact (GET)
-GET https://cse-341-w01-contacts.onrender.com/contacts/690d787a35769c793aa1f88a
+GET https://cse-341-w01-contacts.onrender.com/contacts/690d7f9c9c1acdc01132783b
 

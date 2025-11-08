@@ -19,7 +19,7 @@ if (fs.existsSync(routesFile)) {
 
 const doc = {
   swagger: '2.0',
-  info: { title: 'Temple API', description: 'Docs for /contacts and /temples', version: '1.0.0' },
+  info: { title: 'Contacts / Temple API', description: 'Docs for /contacts and /temples', version: '1.0.0' },
   host: process.env.SWAGGER_HOST || `localhost:${process.env.PORT || 8080}`,
   basePath: '/',
   schemes: (process.env.SWAGGER_SCHEMES || 'http').split(','),
