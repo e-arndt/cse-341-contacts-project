@@ -1,43 +1,86 @@
-### Local test - Root route
+############################
+# LOCALHOST TESTS
+############################
+
+### Local - Root route
 GET http://localhost:8080/
 
-### Local test - All contacts
-GET http://localhost:8080/contacts
-
-### Local test - One contact
-GET http://localhost:8080/contacts/6906df468c0abc46e3e19583
-
-### Local test - Professional route
+### Local - Professional route
 GET http://localhost:8080/professional
 
+### Local - All contacts
+GET http://localhost:8080/contacts
 
-### Render test - Root route
-GET https://cse-341-w01-contacts.onrender.com/
+### Local - One contact (update this ID from your DB)
+GET http://localhost:8080/contacts/PUT_REAL_ID_HERE
 
-### Render test - All contacts
-GET https://cse-341-w01-contacts.onrender.com/contacts
-
-### Render test - One contact
-GET https://cse-341-w01-contacts.onrender.com/contacts/6906df5e8c0abc46e3e19584
-
-### Render test - Professional route
-GET https://cse-341-w01-contacts.onrender.com/professional
-
-### Render test - New contact (POST)
-POST https://cse-341-w01-contacts.onrender.com/contacts
+### Local - Create new contact
+POST http://localhost:8080/contacts
 Content-Type: application/json
 
 {
-  "firstName": "Donny",
-  "lastName": "Doe",
-  "email": "jane.doe@example.com",
+  "firstName": "Local",
+  "lastName": "User",
+  "email": "local.user@example.com",
+  "favoriteColor": "Blue",
+  "birthday": "1990-01-01"
+}
+
+### Local - Update contact
+PUT http://localhost:8080/contacts/PUT_REAL_ID_HERE
+Content-Type: application/json
+
+{
+  "firstName": "UpdatedLocal",
+  "lastName": "User",
+  "email": "updated.local@example.com",
+  "favoriteColor": "Green",
+  "birthday": "1991-02-02"
+}
+
+### Local - Delete contact
+DELETE http://localhost:8080/contacts/PUT_REAL_ID_HERE
+
+
+### Local - All temples
+GET http://localhost:8080/temples
+
+### Local - Temple by temple_id
+GET http://localhost:8080/temples/1
+
+
+
+############################
+# RENDER TESTS (DEPLOYED)
+# https://cse-341-contacts-project-cou4.onrender.com
+############################
+
+### Render - Root route
+GET https://cse-341-contacts-project-cou4.onrender.com/
+
+### Render - Professional route
+GET https://cse-341-contacts-project-cou4.onrender.com/professional
+
+### Render - All contacts
+GET https://cse-341-contacts-project-cou4.onrender.com/contacts
+
+### Render - One contact (set to a real ID from the above GET)
+GET https://cse-341-contacts-project-cou4.onrender.com/contacts/PUT_REAL_ID_HERE
+
+### Render - Create new contact
+POST https://cse-341-contacts-project-cou4.onrender.com/contacts
+Content-Type: application/json
+
+{
+  "firstName": "Render",
+  "lastName": "User",
+  "email": "render.user@example.com",
   "favoriteColor": "Navy",
   "birthday": "1998-05-20"
 }
 
-
-### Render test - Update existing contact (PUT - John Doe)
-PUT https://cse-341-w01-contacts.onrender.com/contacts/690d80759c1acdc01132783c
+### Render - Update existing contact
+PUT https://cse-341-contacts-project-cou4.onrender.com/contacts/PUT_REAL_ID_HERE
 Content-Type: application/json
 
 {
@@ -48,11 +91,12 @@ Content-Type: application/json
   "birthday": "1990-03-15"
 }
 
+### Render - Delete contact
+DELETE https://cse-341-contacts-project-cou4.onrender.com/contacts/PUT_REAL_ID_HERE
 
-### Render test - Delete contact (DELETE - Jane Doe)
-DELETE https://cse-341-w01-contacts.onrender.com/contacts/690d7f9c9c1acdc01132783b
 
+### Render - All temples
+GET https://cse-341-contacts-project-cou4.onrender.com/temples
 
-### Render test - Verify deleted contact (GET)
-GET https://cse-341-w01-contacts.onrender.com/contacts/690d7f9c9c1acdc01132783b
-
+### Render - Temple by temple_id
+GET https://cse-341-contacts-project-cou4.onrender.com/temples/1

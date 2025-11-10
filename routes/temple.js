@@ -1,7 +1,7 @@
 // routes/temple.js
 const router = require('express').Router();
 const checkKey = require('../utilities/checkKey');
-const temples = require('../controllers/temples'); // or '../controllers/temple' if you kept that name
+const temples = require('../controllers/temples');
 
 // /temples base path is in routes/routes.js
 

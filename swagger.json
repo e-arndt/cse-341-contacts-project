@@ -5,7 +5,7 @@
     "description": "Docs for /contacts and /temples",
     "version": "1.0.0"
   },
-  "host": "cse-341-w01-contacts.onrender.com",
+  "host": "cse-341-contacts-project-cou4.onrender.com",
   "basePath": "/",
   "tags": [
     {

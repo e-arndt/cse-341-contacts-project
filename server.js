@@ -2,7 +2,7 @@
 require('dotenv').config();
 const express = require('express');
 const { initDb } = require('./database/connect');
-const routes = require('./routes/contacts');
+const routes = require('./routes/routes');
 
 const app = express();
 const port = process.env.PORT || 8080;
