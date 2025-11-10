@@ -64,8 +64,8 @@ GET https://cse-341-contacts-project-cou4.onrender.com/professional
 ### Render - All contacts
 GET https://cse-341-contacts-project-cou4.onrender.com/contacts
 
-### Render - One contact (set to a real ID from the above GET)
-GET https://cse-341-contacts-project-cou4.onrender.com/contacts/PUT_REAL_ID_HERE
+### Render - One contact
+GET https://cse-341-contacts-project-cou4.onrender.com/contacts/69117a0f3011dab464102c9a
 
 ### Render - Create new contact
 POST https://cse-341-contacts-project-cou4.onrender.com/contacts
