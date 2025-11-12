@@ -1,7 +1,7 @@
 // server.js
 require('dotenv').config();
 const express = require('express');
-const { initDb } = require('./database/connect');
+const { connect } = require('./database/mongoose');
 const routes = require('./routes/routes');
 
 const app = express();
@@ -31,24 +31,42 @@ app
   .get('/', /* #swagger.tags = ['Contacts'] */ (req, res) => res.send('Server is up'));
   
 
-// Main error handler
+// Unified error handler (handles Mongoose & general errors)
 app.use((err, req, res, next) => {
-  console.error(err);
-  if (res.headersSent) {
-    next(err);
-    return;
+  if (res.headersSent) return next(err);
+
+  // Duplicate key - Mongo error code for Dup key = 11000 - (require unique email)
+  if (err && err.code === 11000) {
+    return res.status(409).json({ message: 'Duplicate key', details: err.keyValue });
   }
+
+  // Validation errors (e.g., bad email, missing fields)
+  if (err && err.name === 'ValidationError') {
+    const errors = Object.fromEntries(
+      Object.entries(err.errors).map(([k, v]) => [k, v.message])
+    );
+    return res.status(400).json({ message: 'Validation failed', errors });
+  }
+
+  // Invalid ObjectId
+  if (err && err.name === 'CastError' && err.kind === 'ObjectId') {
+    return res.status(400).json({ message: 'Invalid ID format' });
+  }
+
+  console.error(err);
   res.status(500).json({ error: 'Server error', detail: err.message });
 });
 
 
-// Initialize DB, then start server
-initDb((err) => {
-  if (err) {
+
+// Initialize Mongoose, then start server
+connect()
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`Connected to DB and listening on ${port}`);
+    });
+  })
+  .catch((err) => {
     console.error('Database connection failed:', err);
     process.exit(1);
-  }
-  app.listen(port, () => {
-    console.log(`Connected to DB and listening on ${port}`);
   });
-});
