@@ -9,8 +9,6 @@ const endpointsFiles = [
   path.join(__dirname, 'routes', 'contacts.js'),
 ];
 
-const isProd = process.env.NODE_ENV === 'production';
-
 const doc = {
   swagger: '2.0',
   info: {
